@@ -66,6 +66,11 @@ We must provide server statistics from the BIND process itself. This allows Bind
 
 This tells bind to start an HTTP server on port 8053 on all interfaces, allowing 10.10.0.0/24 to make requests on this interface, http://${bind_server}:8053/. You will most likely want to narrow down the subset of hosts or subnets that can query BIND for this data. This data can be viewed via your choice of Browser, or read by your favorite programming language and progamatically processed by your choice of XML library.
 
+
+#### TSIG Keys ####
+
+according to : http://lamejournal.com/2013/06/10/bind-enabling-tsig-for-zone-transfers/
+
     include "/etc/bind/dynzone.key";
 
 This tells Bind to load a TSIG key from dynzone.key that can be referenced later in named.conf.
