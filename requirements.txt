@@ -1,0 +1,4 @@
+BeautifulSoup==3.2.1
+dnspython==1.11.1
+flup==1.0.3.dev-20110405
+wsgiref==0.1.2
