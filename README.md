@@ -53,11 +53,16 @@ When Binder accesses your BIND DNS server, it first queries the statistics port 
 
 #### named.conf ####
 
-We must provide server statistics from the BIND process itself. This allows Binder to query BIND itself and get a list of zones, views, and other statistics.
+We must provide server statistics from the BIND process itself. This allows Binder to query BIND itself and get a list of zones, views, and other statistics. Throw this in your `/etc/bind/named.conf`.
 
     statistics-channels {
-        inet * port 8053 allow { 10.10.0.0/24; };
+        inet LISTEN-ON-IP port ON-PORT allow { ALLOW-IP-OR-RANGE; };
     };
+
+1. replace LISTEN-ON-IP with the ip of the interface to listen on  (ie: 127.0.0.1 for privacy)
+2. replace ON-PORT with something like 8053
+3. replace ALLOW-IP-OR-RANGE with trusted IP (ie: 127.0.0.1)
+
 
 This tells bind to start an HTTP server on port 8053 on all interfaces, allowing 10.10.0.0/24 to make requests on this interface, http://${bind_server}:8053/. You will most likely want to narrow down the subset of hosts or subnets that can query BIND for this data. This data can be viewed via your choice of Browser, or read by your favorite programming language and progamatically processed by your choice of XML library.
 
